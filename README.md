@@ -73,3 +73,57 @@ This design is suitable for:
 (w_ptr_gray == {~r_ptr_gray_sync2[bit_depth:bit_depth-1],r_ptr_gray_sync2[bit_depth-2:0]}) 
 ### Empty condition
 (r_ptr_gray == w_ptr_gray_sync2)
+
+
+---
+
+## 🔄 Reset Strategy
+- Asynchronous resets for both domains
+- Both domains must be reset together
+- Prevents pointer mismatch and false flags
+
+---
+
+## 🧪 Verification
+
+Testbench verifies:
+
+✔ Reset behavior  
+✔ Read when empty  
+✔ Write when full  
+✔ Fill and drain  
+✔ FIFO ordering correctness  
+✔ Wrap-around behavior  
+✔ Simultaneous read/write  
+✔ Different clock frequencies  
+
+Simulation tool: **Vivado Simulator**
+
+---
+
+## ▶️ How to Run Simulation (Vivado)
+
+1. Add design & testbench files
+2. Run Behavioral Simulation
+3. Observe:
+   - correct ordering
+   - proper full/empty flags
+   - no data loss
+
+---
+
+## 📊 Example Waveform Observations
+
+- Data written sequentially
+- Read order preserved
+- Full asserts at depth
+- Empty asserts after drain
+- Safe CDC between clocks
+
+---
+
+## 🧩 Parameters
+
+```verilog
+parameter width = 8;
+parameter depth = 16;

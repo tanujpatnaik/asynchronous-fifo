@@ -70,5 +70,6 @@ This design is suitable for:
 - Only one bit changes → prevents metastability issues
 
 ### Full condition
-
+(w_ptr_gray == {~r_ptr_gray_sync2[bit_depth:bit_depth-1],r_ptr_gray_sync2[bit_depth-2:0]}) 
 ### Empty condition
+(r_ptr_gray == w_ptr_gray_sync2)

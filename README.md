@@ -52,4 +52,8 @@ This design is suitable for:
 
 ## 📂 Files
 [async_fifo.v](https://github.com/tanujpatnaik/asynchronous-fifo/blob/main/async_fifo.v)
+
 [test.sv](https://github.com/tanujpatnaik/asynchronous-fifo/blob/main/test.sv)
+
+[readme.md](https://github.com/tanujpatnaik/asynchronous-fifo/edit/main/README.md)
+

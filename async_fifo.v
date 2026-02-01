@@ -1,4 +1,4 @@
-module async #(parameter width = 8 , parameter depth = 16)(r_clk,w_clk,rst_w_n,rst_r_n,w_en,r_en,w_data,r_data,full,empty);
+module async_fifo #(parameter width = 8 , parameter depth = 16)(r_clk,w_clk,rst_w_n,rst_r_n,w_en,r_en,w_data,r_data,full,empty);
 input w_clk;
 input rst_w_n;
 input w_en;
@@ -37,7 +37,7 @@ end
 always @(posedge w_clk)
 begin
     if (w_en && !full)
-    fifo[w_ptr_bin[bit_depth-1:0]] <= w_data;
+        fifo[w_ptr_bin[bit_depth-1:0]] <= w_data;
 end
 
 
@@ -53,11 +53,14 @@ begin
     end
 end
 
-always @(posedge r_clk)
+always @(posedge r_clk or negedge rst_r_n)
 begin
-    if(r_en && !empty)
-    r_data <= fifo[r_ptr_bin[bit_depth-1:0]];
+    if (!rst_r_n)
+        r_data <= {width{1'b0}};
+    else if (r_en && !empty)
+        r_data <= fifo[r_ptr_bin[bit_depth-1:0]];
 end
+
 
 always @(posedge r_clk or negedge rst_r_n) // synchronization from write to read
 begin

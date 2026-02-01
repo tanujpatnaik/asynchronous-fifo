@@ -51,4 +51,4 @@ This design is suitable for:
 ---
 
 ## 📂 Files
-asynchronous-fifo/async_fifo.v
+https://github.com/tanujpatnaik/asynchronous-fifo/blob/main/async_fifo.v

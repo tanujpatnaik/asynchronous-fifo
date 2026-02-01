@@ -58,3 +58,17 @@ This design is suitable for:
 [readme.md](https://github.com/tanujpatnaik/asynchronous-fifo/edit/main/README.md)
 
 [images](https://github.com/tanujpatnaik/asynchronous-fifo/tree/main/images)
+
+
+---
+
+## 🧠 Design Details
+
+### Pointer handling
+- Binary counter → memory indexing
+- Gray counter → cross-domain transfer
+- Only one bit changes → prevents metastability issues
+
+### Full condition
+
+### Empty condition

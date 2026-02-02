@@ -86,6 +86,7 @@ begin
     end
 end
 
+reg empty_reg, full_reg;
 // Empty flag - synchronous to read clock
 always @(posedge r_clk or negedge rst_r_n)
 begin

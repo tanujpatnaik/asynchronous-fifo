@@ -86,6 +86,23 @@ begin
     end
 end
 
-assign empty = (r_ptr_gray == w_ptr_gray_sync2); //empty condition
-assign full = (w_ptr_gray == {~r_ptr_gray_sync2[bit_depth:bit_depth-1],r_ptr_gray_sync2[bit_depth-2:0]}); //full condition 
+// Empty flag - synchronous to read clock
+always @(posedge r_clk or negedge rst_r_n)
+begin
+    if (!rst_r_n)
+        empty_reg <= 1'b1;   // FIFO empty after reset
+    else
+        empty_reg <= (r_ptr_gray == w_ptr_gray_sync2);
+end
+    
+// Full flag - synchronous to write clock
+always @(posedge w_clk or negedge rst_w_n)
+begin
+    if (!rst_w_n)
+        full_reg <= 1'b0;    // FIFO not full after reset
+    else
+        full_reg <= (w_ptr_gray =={~r_ptr_gray_sync2[bit_depth:bit_depth-1],r_ptr_gray_sync2[bit_depth-2:0]});
+end
+assign empty = empty_reg;
+assign full  = full_reg;
 endmodule
